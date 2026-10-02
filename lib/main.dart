@@ -5,7 +5,7 @@ String find_result(String player1,String player2){
     return '';
   }
   if(player1==player2){
-    return "equal";
+    return "draw";
   }else{
     if(player1 == 'rock' && player2 == 'scissor'){
       return 'player1 win';
@@ -183,7 +183,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                   const SizedBox(height: 20),
-                  Text(key: Key(result), result, style:TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
+                  Text(result, style:TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
+                  const SizedBox(height: 20),
+                  Text(player1, style:TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
+                  const SizedBox(height: 20),
+                  Text(player2, style:TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
+                  
             ],
           ),
         ),

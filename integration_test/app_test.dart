@@ -34,11 +34,21 @@ void main() {
 
     await tester.tap(find.byKey(const Key('rock_botton')));
     await tester.tap(find.byKey(const Key('continue_botton')));
-    await tester.tap(find.byKey(const Key('paper_botton')));
+    await tester.tap(find.byKey(const Key('scissor_botton')));
     await tester.tap(find.byKey(const Key('result_botton')));
 
     await tester.pumpAndSettle(const Duration(seconds: 3),);
 
-    expect(find.text('player2 win'), findsOneWidget);
+    expect(find.text('player1 win'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('rock_botton')));
+    await tester.tap(find.byKey(const Key('continue_botton')));
+    await tester.tap(find.byKey(const Key('rock_botton')));
+    await tester.tap(find.byKey(const Key('result_botton')));
+
+    await tester.pumpAndSettle(const Duration(seconds: 3),);
+
+    expect(find.text('draw'), findsOneWidget);
+    
   });
 }
