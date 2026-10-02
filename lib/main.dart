@@ -1,5 +1,34 @@
 import 'package:flutter/material.dart';
 
+String find_result(String player1,String player2){
+  if(player1 == '' || player2 == ''){
+    return '';
+  }
+  if(player1==player2){
+    return "equal";
+  }else{
+    if(player1 == 'rock' && player2 == 'scissor'){
+      return 'player1 win';
+    }
+    if(player1 == 'rock' && player2 == 'paper'){
+      return 'player2 win';
+    }
+    if(player1 == 'scissor' && player2 == 'paper'){
+      return 'player1 win';
+    }
+    if(player1 == 'scissor' && player2 == 'rock'){
+      return 'player2 win';
+    }
+    if(player1 == 'paper' && player2 == 'rock'){
+      return 'player1 win';
+    }
+    if(player1 == 'paper' && player2 == 'scissor'){
+      return 'player2 win';
+    }
+  }
+  return '';
+}
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,11 +56,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _name = TextEditingController();
-  String greeting = "";
+  String player1 = "akka";
+  String player2 = "hello";
+  String result = "";
+  bool isContinue = false;
 
   @override
   void dispose() {
-    _name.dispose();
     super.dispose();
   }
 
@@ -50,24 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // แก้ไขจุดที่ 1: หุ้ม TextField ด้วย Expanded
-                  Container(
-                    width: 200,
-                    child: TextField(
-                      controller: _name,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your name',
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 25,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-
+                  
                   ElevatedButton(
+                    key: Key('rock_botton'),
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(
                         120,
@@ -75,19 +91,99 @@ class _MyHomePageState extends State<MyHomePage> {
                       ), // ความกว้าง 120, ความสูง 50
                     ),
                     onPressed: () {
-                      // แก้ไขจุดที่ 2: อัปเดตเฉพาะข้อความที่จะนำมาแสดงผล
                       setState(() {
-                        if (_name.text.isNotEmpty) {
-                          greeting = "Hello, ${_name.text}!";
+                        if (isContinue) {
+                           player2 = 'rock';
+                        }else{
+                           player1 = 'rock';
                         }
                       });
                     },
-                    child: const Text('Hello'),
+                    child: const Text('Rock'),
                   ),
+                  const SizedBox(width: 10),
+
+                  ElevatedButton(
+                    key: Key('paper_botton'),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(
+                        120,
+                        50,
+                      ), // ความกว้าง 120, ความสูง 50
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (isContinue) {
+                           player2 = 'paper';
+                        }else{
+                           player1 = 'paper';
+                        }
+                      });
+                    },
+                    child: const Text('Paper'),
+                  ),
+                  const SizedBox(width: 10),
+
+
+                  ElevatedButton(
+                    key: Key('scissor_botton'),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(
+                        120,
+                        50,
+                      ), // ความกว้าง 120, ความสูง 50
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (isContinue) {
+                           player2 = 'scissor';
+                        }else{
+                           player1 = 'scissor';
+                        }
+                      });
+                    },
+                    child: const Text('Scissor'),
+                  ),
+                  const SizedBox(width: 10),
                 ],
               ),
               const SizedBox(height: 20),
-              Text(greeting, style: const TextStyle(fontSize: 24)),
+
+              ElevatedButton(
+                    key: Key('continue_botton'),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(
+                        120,
+                        50,
+                      ), // ความกว้าง 120, ความสูง 50
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isContinue = true;
+                      });
+                    },
+                    child: const Text('Continue'),
+                  ),
+                  const SizedBox(height: 20),
+                
+                ElevatedButton(
+                  key: Key('result_botton'),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(
+                        120,
+                        50,
+                      ), // ความกว้าง 120, ความสูง 50
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        result = find_result(player1, player2);
+                      });
+                    },
+                    child: const Text('Result'),
+                  ),
+
+                  const SizedBox(height: 20),
+                  Text(key: Key(result), result, style:TextStyle(fontWeight: FontWeight.bold,fontSize: 28,),),
             ],
           ),
         ),
