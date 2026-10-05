@@ -80,4 +80,27 @@ void main() {
   }
   
   );
+
+    group('dont input', (){
+      
+    test('null', () {
+
+      String result = find_result('', '');
+      expect(result, '');
+    });
+
+    test('null value', () {
+
+      String result = find_result('', 'paper');
+      expect(result, '');
+    });
+
+    test('value null', () {
+
+      String result = find_result('scissor', '');
+      expect(result, '');
+    });
+  }
+  
+  );
 }

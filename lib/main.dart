@@ -56,8 +56,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _name = TextEditingController();
-  String player1 = "akka";
-  String player2 = "hello";
+  String player1 = "";
+  String player2 = "";
   String result = "";
   bool isContinue = false;
 
